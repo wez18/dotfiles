@@ -14,7 +14,7 @@ bootstrap:
   #!/usr/bin/env bash
 
   set -euo pipefail
-  set -o xtrace
+  # set -o xtrace # Debug
 
   echo "Creating directory..."
   mkdir -p {{ target_directory }}
@@ -56,12 +56,3 @@ bootstrap:
 
   echo "Done!"
 
-_post_bootstrap:
-  #!/usr/bin/env bash
-
-  cat <<EOF
-  Installation finished!
-
-  Things you still need to do:
-
-  EOF
