@@ -1,0 +1,24 @@
+# IDE
+.idea/*
+*.iws
+*.iml
+*.ipr
+.vscode/*
+.DS_Store
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+.terraformrc
+terraform.rc
+**/.terragrunt-cache/*
+crash.log
+
+# Dependency Directories
+__pycache__/
+.venv
+node_modules/
+.bundle/*
+.gradle
