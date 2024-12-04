@@ -24,16 +24,16 @@ bootstrap:
 
   echo "Injecting dotfiles..."
   if [ -d "{{ target_directory }}/kitty" ]; then
-    echo "Deleting {{ target_directory }}/kitty in preparation for symlink"
-    rm -rf {{ target_directory }}/kitty
+    echo "Backing up {{ target_directory }}/kitty to {{ target_directory}}/kitty.bak"
+    mv {{ target_directory }}/kitty {{ target_directory }}/kitty.bak
   fi
 
   echo "Symlinking kitty config"
   ln -sf  {{ jwd }}/kitty {{ target_directory }}/kitty
 
   if [ -d "{{ target_directory }}/nvim" ]; then
-    echo "Deleting {{ target_directory }}/nvim in preparation for symlink"
-    rm -rf {{ target_directory }}/nvim
+    echo "Backing up {{ target_directory }}/nvim to {{ target_directory }}/nvim.bak"
+    mv {{ target_directory }}/nvim {{ target_directory }}/nvim.bak
   fi
 
   echo "Symlinking nvim config"
