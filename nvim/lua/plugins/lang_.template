@@ -1,0 +1,37 @@
+return {
+  {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = {} },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = {} },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {},
+      setup = {},
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {},
+    },
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = vim.list_extend(opts.sources or {}, {})
+    end,
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {},
+    opts = {
+      adapters = {},
+    },
+  },
+}
