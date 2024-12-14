@@ -1,5 +1,6 @@
 brew "asdf"
 brew "age"
+brew "ast-grep"
 brew "awscli"
 brew "azure-cli"
 brew "bat"
