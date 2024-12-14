@@ -4,7 +4,7 @@ jwd := justfile_directory()
 cwd := invocation_directory()
 home_dir := home_directory()
 
-target_directory := home_dir / ".config"
+target_dir := home_dir / ".config"
 
 alias brew := install
 
@@ -26,35 +26,35 @@ config:
   set -euo pipefail
   # set -o xtrace # Debug
 
-  echo "Ensuring directory '{{ target_directory }}' exists..."
-  mkdir -p {{ target_directory }}
+  echo "Ensuring directory '{{ target_dir }}' exists..."
+  mkdir -p {{ target_dir }}
 
   echo "Injecting dotfiles..."
-  if [ -d "{{ target_directory }}/kitty" ]; then
-    if [ ! -L "{{ target_directory }}/kitty" ]; then
-      echo "Backing up {{ target_directory }}/kitty to {{ target_directory}}/kitty.bak"
-      mv {{ target_directory }}/kitty {{ target_directory }}/kitty.bak
+  if [ -d "{{ target_dir }}/kitty" ]; then
+    if [ ! -L "{{ target_dir }}/kitty" ]; then
+      echo "Backing up {{ target_dir }}/kitty to {{ target_dir }}/kitty.bak"
+      mv {{ target_dir }}/kitty {{ target_dir }}/kitty.bak
     else
-      echo "{{ target_directory }}/kitty is a symlink, not backing up"
-      ls -l "{{ target_directory }}/kitty"
+      echo "{{ target_dir }}/kitty is a symlink, not backing up"
+      ls -l "{{ target_dir }}/kitty"
     fi
   fi
 
   echo "Symlinking kitty config"
-  ln -sf  {{ jwd }}/kitty {{ target_directory }}/kitty
+  ln -sf  {{ jwd }}/kitty {{ target_dir }}/kitty
 
-  if [ -d "{{ target_directory }}/nvim" ]; then
-    if [ ! -L "{{ target_directory }}/nvim" ]; then
-      echo "Backing up {{ target_directory }}/nvim to {{ target_directory }}/nvim.bak"
-      mv {{ target_directory }}/nvim {{ target_directory }}/nvim.bak
+  if [ -d "{{ target_dir }}/nvim" ]; then
+    if [ ! -L "{{ target_dir }}/nvim" ]; then
+      echo "Backing up {{ target_dir }}/nvim to {{ target_dir }}/nvim.bak"
+      mv {{ target_dir }}/nvim {{ target_dir }}/nvim.bak
     else
-      echo "{{ target_directory }}/nvim is a symlink, not backing up"
-      ls -l "{{ target_directory }}/nvim"
+      echo "{{ target_dir }}/nvim is a symlink, not backing up"
+      ls -l "{{ target_dir }}/nvim"
     fi
   fi
 
   echo "Symlinking nvim config"
-  ln -sf  {{ jwd }}/nvim {{ target_directory }}/nvim
+  ln -sf  {{ jwd }}/nvim {{ target_dir }}/nvim
 
   touch {{ home_dir }}/.gitconfig
   if [ -z "$(grep 'path = {{ jwd }}/.gitconfig' '{{ home_dir }}/.gitconfig')" ]; then

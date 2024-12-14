@@ -18,5 +18,5 @@
   colorMoved = default
 
 [init]
-  defaultBranch = true
+  defaultBranch = main
 
