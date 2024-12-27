@@ -1,0 +1,13 @@
+font-size = 12
+
+theme = tokyonight
+
+quick-terminal-position = center
+quick-terminal-animation-duration = 0.2
+
+keybind = global:ctrl+§=toggle_quick_terminal
+
+macos-titlebar-style = tabs
+
+macos-option-as-alt = right
+
