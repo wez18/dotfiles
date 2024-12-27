@@ -26,35 +26,32 @@ config:
   set -euo pipefail
   # set -o xtrace # Debug
 
+  link_config() {
+    local config_name=$1
+
+    echo "Configuring ${config_name}"
+    if [ -d "{{ target_dir }}/${config_name}" ]; then
+      if [ ! -L "{{ target_dir }}/${config_name}" ]; then
+        echo "Backing up {{ target_dir }}/${config_name} to {{ target_dir }}/${config_name}.bak"
+        mv {{ target_dir }}/${config_name} {{ target_dir }}/${config_name}.bak
+      else
+        echo "{{ target_dir }}/${config_name} is a symlink, not backing up"
+        ls -l "{{ target_dir }}/${config_name}"
+      fi
+    fi
+
+    echo "Symlinking ${config_name} config"
+    ln -sf  {{ jwd }}/${config_name} {{ target_dir }}/${config_name}
+  }
+
   echo "Ensuring directory '{{ target_dir }}' exists..."
   mkdir -p {{ target_dir }}
 
   echo "Injecting dotfiles..."
-  if [ -d "{{ target_dir }}/kitty" ]; then
-    if [ ! -L "{{ target_dir }}/kitty" ]; then
-      echo "Backing up {{ target_dir }}/kitty to {{ target_dir }}/kitty.bak"
-      mv {{ target_dir }}/kitty {{ target_dir }}/kitty.bak
-    else
-      echo "{{ target_dir }}/kitty is a symlink, not backing up"
-      ls -l "{{ target_dir }}/kitty"
-    fi
-  fi
 
-  echo "Symlinking kitty config"
-  ln -sf  {{ jwd }}/kitty {{ target_dir }}/kitty
-
-  if [ -d "{{ target_dir }}/nvim" ]; then
-    if [ ! -L "{{ target_dir }}/nvim" ]; then
-      echo "Backing up {{ target_dir }}/nvim to {{ target_dir }}/nvim.bak"
-      mv {{ target_dir }}/nvim {{ target_dir }}/nvim.bak
-    else
-      echo "{{ target_dir }}/nvim is a symlink, not backing up"
-      ls -l "{{ target_dir }}/nvim"
-    fi
-  fi
-
-  echo "Symlinking nvim config"
-  ln -sf  {{ jwd }}/nvim {{ target_dir }}/nvim
+  link_config "ghostty"
+  link_config "kitty"
+  link_config "nvim"
 
   touch {{ home_dir }}/.gitconfig
   if [ -z "$(grep 'path = {{ jwd }}/.gitconfig' '{{ home_dir }}/.gitconfig')" ]; then
