@@ -52,6 +52,7 @@ config:
   link_config "ghostty"
   link_config "kitty"
   link_config "nvim"
+  link_config "zed"
 
   touch {{ home_dir }}/.gitconfig
   if [ -z "$(grep 'path = {{ jwd }}/.gitconfig' '{{ home_dir }}/.gitconfig')" ]; then
