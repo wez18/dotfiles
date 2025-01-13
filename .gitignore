@@ -26,3 +26,6 @@ node_modules/
 # Lazy files
 nvim/lazy-lock.json
 nvim/lazyvim.json
+
+# Zed
+zed/prompts/*
